@@ -50,7 +50,7 @@ function Dashboard({ onLogout }: DashboardProps) {
     <div className="flex flex-col h-screen bg-gray-100">
       {/* Top Navigation Bar */}
       <header className="bg-white shadow-md flex items-center justify-between p-4 relative">
-        <h1 className="text-2xl font-bold text-blue-600 md:block">DigiWallet</h1>
+        <h1 className="text-2xl font-bold text-blue-600 md:block">StratPay</h1>
         
         {/* Centered Navigation Menu for Larger Screens */}
         <div className="hidden md:flex flex-grow justify-center">
@@ -68,8 +68,8 @@ function Dashboard({ onLogout }: DashboardProps) {
           ))}
         </div>
 
-        {/* Profile Icon for Larger Screens */}
-        <div className="relative hidden md:flex items-center">
+        {/* Profile Icon for All Screens */}
+        <div className="relative flex items-center">
           <button 
             onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)} 
             className="flex items-center space-x-2 text-gray-600 hover:text-blue-600"
