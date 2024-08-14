@@ -109,7 +109,7 @@ const AccountManagement: React.FC = () => {
               <li key={account.id} className="px-4 py-4 sm:px-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-indigo-600 truncate">{account.name}</p>
+                    <p className="text-sm font-medium text-blue-600 truncate">{account.name}</p>
                     <p className="text-sm text-gray-500">{account.type}</p>
                   </div>
                   <div className="flex items-center">
@@ -132,17 +132,17 @@ const AccountManagement: React.FC = () => {
               value={newAccountName}
               onChange={(e) => setNewAccountName(e.target.value)}
               placeholder="Account Name"
-              className="flex-grow shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 rounded-md"
+              className="flex-grow shadow-sm focus:ring-blue-500 focus:border-blue-500 block sm:text-sm border-gray-300 rounded-md"
             />
             <select
               value={newAccountType}
               onChange={(e) => setNewAccountType(e.target.value)}
-              className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 rounded-md"
+              className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block sm:text-sm border-gray-300 rounded-md"
             >
               <option value="Checking">Checking</option>
               <option value="Savings">Savings</option>
             </select>
-            <button type="submit" className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            <button type="submit" className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
               <PlusCircle size={18} className="mr-2" />
               Add Account
             </button>
@@ -160,7 +160,7 @@ const AccountManagement: React.FC = () => {
               <li key={bank.id} className="px-4 py-4 sm:px-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-indigo-600 truncate">{bank.name}</p>
+                    <p className="text-sm font-medium text-blue-600 truncate">{bank.name}</p>
                     <p className="text-sm text-gray-500">Account: {bank.accountNumber}</p>
                   </div>
                   <button onClick={() => handleRemoveBank(bank.id)} className="text-red-600 hover:text-red-900">
@@ -178,16 +178,16 @@ const AccountManagement: React.FC = () => {
               value={newBankName}
               onChange={(e) => setNewBankName(e.target.value)}
               placeholder="Bank Name"
-              className="flex-grow shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 rounded-md"
+              className="flex-grow shadow-sm focus:ring-blue-500 focus:border-blue-500 block sm:text-sm border-gray-300 rounded-md"
             />
             <input
               type="text"
               value={newBankAccountNumber}
               onChange={(e) => setNewBankAccountNumber(e.target.value)}
               placeholder="Account Number"
-              className="flex-grow shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 rounded-md"
+              className="flex-grow shadow-sm focus:ring-blue-500 focus:border-blue-500 block sm:text-sm border-gray-300 rounded-md"
             />
-            <button type="submit" className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            <button type="submit" className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
               <Building size={18} className="mr-2" />
               Link Bank
             </button>
@@ -205,7 +205,7 @@ const AccountManagement: React.FC = () => {
               <li key={method.id} className="px-4 py-4 sm:px-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-indigo-600 truncate">{method.type}</p>
+                    <p className="text-sm font-medium text-blue-600 truncate">{method.type}</p>
                     <p className="text-sm text-gray-500">****{method.last4}</p>
                     <p className="text-sm text-gray-500">Expiry: {method.expiryDate}</p>
                   </div>
@@ -224,23 +224,23 @@ const AccountManagement: React.FC = () => {
               value={newCardNumber}
               onChange={(e) => setNewCardNumber(e.target.value)}
               placeholder="Card Number"
-              className="flex-grow shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 rounded-md"
+              className="flex-grow shadow-sm focus:ring-blue-500 focus:border-blue-500 block sm:text-sm border-gray-300 rounded-md"
             />
             <input
               type="text"
               value={newCardExpiry}
               onChange={(e) => setNewCardExpiry(e.target.value)}
               placeholder="Expiry Date"
-              className="flex-grow shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 rounded-md"
+              className="flex-grow shadow-sm focus:ring-blue-500 focus:border-blue-500 block sm:text-sm border-gray-300 rounded-md"
             />
             <input
               type="text"
               value={newCardCVV}
               onChange={(e) => setNewCardCVV(e.target.value)}
               placeholder="CVV"
-              className="flex-grow shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 rounded-md"
+              className="flex-grow shadow-sm focus:ring-blue-500 focus:border-blue-500 block sm:text-sm border-gray-300 rounded-md"
             />
-            <button type="submit" className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            <button type="submit" className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
               <PlusCircle size={18} className="mr-2" />
               Add Payment Method
             </button>
