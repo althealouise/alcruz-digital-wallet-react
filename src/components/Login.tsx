@@ -1,5 +1,6 @@
 import React, { useState, FormEvent, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useTheme } from '../ThemeContext'; // Adjust the path as needed
 
 interface LoginProps {
   onLogin: () => void;
@@ -10,6 +11,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
   const [password, setPassword] = useState<string>('');
   const [validCredentials, setValidCredentials] = useState<{ email: string, password: string }[] | null>(null);
   const navigate = useNavigate();
+  const { theme } = useTheme(); // Use the context to get the current theme
 
   useEffect(() => {
     // Fetch credentials from JSON file
@@ -39,38 +41,45 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-8 rounded shadow-md w-96">
-        <h2 className="text-2xl font-bold mb-4">Login to StratPay</h2>
+    <div className={`min-h-screen flex items-center justify-center bg-gradient-to-tl from-blue-900 via-blue-600 ${theme === 'dark' ? 'to-black' : 'to-white'}`}>
+      <div className={`p-8 rounded-lg shadow-lg w-96 bg-opacity-80 ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
+        <div className="flex justify-center mb-4">
+          <div className="w-24 h-24 flex items-center justify-center">
+            <img src="/stratpay.png" alt="Logo" />
+          </div>
+        </div>
+        <h2 className={`text-2xl font-bold mb-4 text-center ${theme === 'dark' ? 'text-gray-100' : 'text-gray-900'}`}>
+          Login to <span className="text-blue-600">StratPay</span>
+        </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+            <label htmlFor="email" className={`block text-sm font-medium ${theme === 'dark' ? 'text-gray-400' : 'text-gray-700'}`}>Email</label>
             <input
               type="email"
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+              className={`mt-1 block w-full border ${theme === 'dark' ? 'border-gray-600 bg-gray-700 text-gray-100' : 'border-gray-300 bg-white text-gray-900'} rounded-md shadow-sm p-2`}
             />
           </div>
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
+            <label htmlFor="password" className={`block text-sm font-medium ${theme === 'dark' ? 'text-gray-400' : 'text-gray-700'}`}>Password</label>
             <input
               type="password"
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+              className={`mt-1 block w-full border ${theme === 'dark' ? 'border-gray-600 bg-gray-700 text-gray-100' : 'border-gray-300 bg-white text-gray-900'} rounded-md shadow-sm p-2`}
             />
           </div>
-          <button type="submit" className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-200">
+          <button type="submit" className={`w-full py-2 px-4 rounded ${theme === 'dark' ? 'bg-blue-500 hover:bg-blue-600 text-white' : 'bg-blue-600 hover:bg-blue-700 text-white'} transition duration-200`}>
             Log In
           </button>
         </form>
-        <p className="mt-4 text-center">
-          Don't have an account? <Link to="/register" className="text-blue-600 hover:underline">Register here</Link>
+        <p className={`mt-4 text-center ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+          Don't have an account? <Link to="/register" className={`text-blue-600 hover:underline ${theme === 'dark' ? 'hover:text-blue-500' : ''}`}>Register here</Link>
         </p>
       </div>
     </div>

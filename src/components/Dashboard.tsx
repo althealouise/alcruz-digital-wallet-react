@@ -54,7 +54,7 @@ function Dashboard({ onLogout }: DashboardProps): React.ReactElement {
       <header className={`shadow-md flex items-center justify-between p-4 relative ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
         {/* Logo and Title */}
         <div className="flex items-center space-x-2">
-          <img src="/stratpay.png" alt="Logo" className="w-10 h-10" /> {/* Replace with your logo */}
+          <img src="/stratpay.png" alt="Logo" className="w-10 h-10" /> 
           <h1 className="text-2xl font-bold text-blue-600">StratPay</h1>
         </div>
 
