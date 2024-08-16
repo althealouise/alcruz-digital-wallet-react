@@ -16,6 +16,8 @@ code {
     monospace;
 }
 
+/* toggle theme styles */
+
 .theme-toggle-button {
   position: absolute;
   top: 10px;
@@ -24,4 +26,30 @@ code {
   border: none;
   cursor: pointer;
   font-size: 24px;
+}
+
+.rotate-clockwise {
+  animation: rotateClockwise 0.5s forwards;
+}
+
+.rotate-counterclockwise {
+  animation: rotateCounterclockwise 0.5s forwards;
+}
+
+@keyframes rotateClockwise {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotateCounterclockwise {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
 }
