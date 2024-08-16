@@ -9,7 +9,7 @@ interface Transaction {
   amount: number;
 }
 
-const TransactionsView: React.FC = () => {
+const TransactionsView = () => {
   const [transactions] = useState<Transaction[]>([
     { id: 1, date: '2023-07-01', description: 'Grocery Store', amount: -75.50 },
     { id: 2, date: '2023-07-02', description: 'Salary Deposit', amount: 3000 },
@@ -19,6 +19,7 @@ const TransactionsView: React.FC = () => {
   ]);
 
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const [theme] = useState<'light' | 'dark'>('light');
 
   const filteredTransactions = transactions.filter(
     (transaction) =>
@@ -31,32 +32,42 @@ const TransactionsView: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center bg-white shadow rounded-lg p-2">
-        <Search className="text-gray-400 mr-2" size={20} />
+    <div className={`p-6 ${theme === 'dark' ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-900'}`}>
+      <div className={`flex items-center mb-6 ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100'} shadow rounded-lg p-2`}>
+        <Search className={`text-gray-400 ${theme === 'dark' ? 'dark:text-gray-500' : ''}`} size={20} />
         <input
           type="text"
           placeholder="Search transactions..."
-          className="flex-grow outline-none"
+          className={`flex-grow outline-none bg-transparent ${theme === 'dark' ? 'text-gray-100' : 'text-gray-900'}`}
           value={searchTerm}
           onChange={handleSearchChange}
         />
       </div>
-      <div className="bg-white shadow overflow-hidden sm:rounded-lg">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+      <div className={`shadow overflow-hidden sm:rounded-lg ${theme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+        <table className={`min-w-full divide-y ${theme === 'dark' ? 'divide-gray-700' : 'divide-gray-200'}`}>
+          <thead className={`bg-${theme === 'dark' ? 'gray-700' : 'gray-50'}`}>
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
-              <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
+              <th className={`px-6 py-3 text-left text-xs font-medium ${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'} uppercase tracking-wider`}>
+                Date
+              </th>
+              <th className={`px-6 py-3 text-left text-xs font-medium ${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'} uppercase tracking-wider`}>
+                Description
+              </th>
+              <th className={`px-6 py-3 text-right text-xs font-medium ${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'} uppercase tracking-wider`}>
+                Amount
+              </th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody className={`divide-y ${theme === 'dark' ? 'bg-gray-800 divide-gray-700' : 'bg-white divide-gray-200'}`}>
             {filteredTransactions.map((transaction) => (
               <tr key={transaction.id}>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{transaction.date}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{transaction.description}</td>
-                <td className={`px-6 py-4 whitespace-nowrap text-sm text-right font-medium ${transaction.amount >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                <td className={`px-6 py-4 whitespace-nowrap text-sm ${theme === 'dark' ? 'text-gray-300' : 'text-gray-500'}`}>
+                  {transaction.date}
+                </td>
+                <td className={`px-6 py-4 whitespace-nowrap text-sm ${theme === 'dark' ? 'text-gray-300' : 'text-gray-900'}`}>
+                  {transaction.description}
+                </td>
+                <td className={`px-6 py-4 whitespace-nowrap text-sm text-right font-medium ${transaction.amount >= 0 ? (theme === 'dark' ? 'text-green-400' : 'text-green-600') : (theme === 'dark' ? 'text-red-400' : 'text-red-600')}`}>
                   ${Math.abs(transaction.amount).toFixed(2)}
                 </td>
               </tr>

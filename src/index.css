@@ -16,20 +16,6 @@ code {
     monospace;
 }
 
-body.dark {
-  background-color: #2d2d2d;
-  color: white;
-}
-
-.app-container {
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.app-container.dark {
-  background-color: #1a1a1a;
-  color: #eaeaea;
-}
-
 .theme-toggle-button {
   position: absolute;
   top: 10px;

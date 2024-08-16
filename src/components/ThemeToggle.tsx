@@ -13,12 +13,12 @@ const ThemeToggle: React.FC = () => {
   return (
     <button
       onClick={toggleTheme}
-      className="fixed bottom-4 right-4 p-2 rounded-full bg-blue-600 text-white shadow-lg focus:outline-none"
+      className="fixed bottom-4 right-4"
     >
       {theme === 'light' ? (
-        <Moon size={24} />
+        <Moon size={40} className='fixed bottom-4 right-4 rounded-full shadow-lg bg-gray-800 text-blue-600 p-2 focus:outline-none'/>
       ) : (
-        <Sun size={24} />
+        <Sun size={40} className='fixed bottom-4 right-4 rounded-full shadow-lg bg-white text-blue-600 p-2 focus:outline-none'/>
       )}
     </button>
   );

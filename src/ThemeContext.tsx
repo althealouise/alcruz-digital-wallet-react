@@ -18,7 +18,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
-      <div className={`app-container ${theme === 'dark' ? 'dark' : ''}`}>
+      <div className={`app-container ${theme}`}>
         {children}
       </div>
     </ThemeContext.Provider>

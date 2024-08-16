@@ -74,12 +74,12 @@ const StorePurchase: React.FC = () => {
 
   // Simulated QR code scanner
   const QRScanner: React.FC<{ onScan: (qrCode: string) => void }> = ({ onScan }) => (
-    <div className="bg-gray-200 p-4 rounded-lg text-center">
-      <p className="mb-2">Scanning QR Code...</p>
+    <div className="bg-gray-200 dark:bg-gray-700 p-4 rounded-lg text-center">
+      <p className="mb-2 text-gray-900 dark:text-gray-100">Scanning QR Code...</p>
       <input 
         type="text" 
         placeholder="Enter QR code" 
-        className="p-2 border rounded"
+        className="p-2 border rounded dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100"
         onKeyPress={(e) => {
           if (e.key === 'Enter') {
             onScan(e.currentTarget.value);
@@ -87,7 +87,7 @@ const StorePurchase: React.FC = () => {
           }
         }}
       />
-      <p className="mt-2 text-sm text-gray-600">
+      <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
         (In a real app, this would use the device's camera)
       </p>
     </div>
@@ -96,17 +96,17 @@ const StorePurchase: React.FC = () => {
   return (
     <div className="space-y-6">
       {!selectedStore ? (
-        <div className="bg-white shadow overflow-hidden sm:rounded-lg">
+        <div className="bg-white dark:bg-gray-800 shadow overflow-hidden sm:rounded-lg">
           <div className="px-4 py-5 sm:px-6">
-            <h3 className="text-lg leading-6 font-medium text-gray-900">Select a Store</h3>
+            <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">Select a Store</h3>
           </div>
-          <div className="border-t border-gray-200 px-4 py-5 sm:p-6">
+          <div className="border-t border-gray-200 dark:border-gray-700 px-4 py-5 sm:p-6">
             {scanningMode === 'store' ? (
               <QRScanner onScan={handleScan} />
             ) : (
               <button 
                 onClick={() => startScanning('store')}
-                className="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                className="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:bg-blue-500 dark:hover:bg-blue-600"
               >
                 <QrCode size={18} className="mr-2" />
                 Scan Store QR Code
@@ -115,21 +115,21 @@ const StorePurchase: React.FC = () => {
           </div>
         </div>
       ) : (
-        <div className="bg-white shadow overflow-hidden sm:rounded-lg">
+        <div className="bg-white dark:bg-gray-800 shadow overflow-hidden sm:rounded-lg">
           <div className="px-4 py-5 sm:px-6">
-            <h3 className="text-lg leading-6 font-medium text-gray-900">{selectedStore.name}</h3>
-            <p className="mt-1 max-w-2xl text-sm text-gray-500">{selectedStore.distance}</p>
+            <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">{selectedStore.name}</h3>
+            <p className="mt-1 max-w-2xl text-sm text-gray-500 dark:text-gray-400">{selectedStore.distance}</p>
           </div>
-          <div className="border-t border-gray-200 px-4 py-5 sm:px-6">
+          <div className="border-t border-gray-200 dark:border-gray-700 px-4 py-5 sm:px-6">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <h4 className="text-md font-medium text-gray-900 mb-2">Scan Items</h4>
+                <h4 className="text-md font-medium text-gray-900 dark:text-gray-100 mb-2">Scan Items</h4>
                 {scanningMode === 'item' ? (
                   <QRScanner onScan={handleScan} />
                 ) : (
                   <button 
                     onClick={() => startScanning('item')}
-                    className="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                    className="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 dark:bg-green-500 dark:hover:bg-green-600"
                   >
                     <QrCode size={18} className="mr-2" />
                     Scan Item QR Code
@@ -137,15 +137,15 @@ const StorePurchase: React.FC = () => {
                 )}
               </div>
               <div>
-                <h4 className="text-md font-medium text-gray-900 mb-2">Your Cart</h4>
-                <ul className="divide-y divide-gray-200">
+                <h4 className="text-md font-medium text-gray-900 dark:text-gray-100 mb-2">Your Cart</h4>
+                <ul className="divide-y divide-gray-200 dark:divide-gray-700">
                   {cart.map(item => (
                     <li key={item.id} className="py-2">
                       <div className="flex items-center justify-between">
-                        <p className="text-sm font-medium text-gray-900">{item.name} - ${item.price.toFixed(2)}</p>
+                        <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{item.name} - ${item.price.toFixed(2)}</p>
                         <button 
                           onClick={() => removeFromCart(item)}
-                          className="inline-flex items-center px-2 py-1 border border-transparent text-xs font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                          className="inline-flex items-center px-2 py-1 border border-transparent text-xs font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 dark:bg-red-500 dark:hover:bg-red-600"
                         >
                           <X size={14} />
                         </button>
@@ -154,10 +154,10 @@ const StorePurchase: React.FC = () => {
                   ))}
                 </ul>
                 <div className="mt-4">
-                  <p className="text-lg font-medium text-gray-900">Total: ${total.toFixed(2)}</p>
+                  <p className="text-lg font-medium text-gray-900 dark:text-gray-100">Total: ${total.toFixed(2)}</p>
                   <button 
                     onClick={processPayment}
-                    className="mt-2 w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                    className="mt-2 w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:bg-blue-500 dark:hover:bg-blue-600"
                   >
                     <CreditCard size={18} className="mr-2" />
                     Pay Now

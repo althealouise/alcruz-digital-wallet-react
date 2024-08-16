@@ -34,10 +34,10 @@ function AccountsView(): React.ReactElement {
   }, []);
 
   return (
-    <div className={`space-y-6 p-4 ${theme === 'dark' ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-900'}`}>
+    <div className={`space-y-6 p-4 ${theme === 'dark' ? 'bg-gray-900 text-gray-100' : 'text-gray-900'}`}>
       {accounts.map((account) => (
-        <div key={account.id} className={`overflow-hidden shadow rounded-lg ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
-          <div className={`px-4 py-5 sm:p-6 ${theme === 'dark' ? 'bg-gray-800 text-gray-100' : 'bg-white text-gray-900'}`}>
+        <div key={account.id} className={` ${theme === 'dark' ? 'dark:bg-gray-800' : ''} overflow-hidden shadow rounded-lg`}>
+          <div className={`px-4 py-5 sm:p-6  ${theme === 'dark' ? 'dark:bg-gray-800' : ''} overflow-hidden shadow rounded-lg`}>
             <h3 className="text-lg font-medium">{account.name}</h3>
             <p className="mt-1 text-3xl font-semibold">
               ${account.balance.toFixed(2)}
