@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Home, CreditCard, DollarSign, Bell, ShoppingBag, User, Settings, LogOut } from 'lucide-react';
+import { Home, CreditCard, DollarSign, Bell, ShoppingBag, User, Settings, LogOut, CircleUserRoundIcon } from 'lucide-react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import HomeView from './views/HomeView';
 import TransactionsView from './views/TransactionsView';
@@ -84,7 +84,7 @@ function Dashboard({ onLogout }: DashboardProps): React.ReactElement {
               theme === 'dark' ? 'text-gray-300 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'
             }`}
           >
-            <img src="https://via.placeholder.com/40" alt="Profile" className="w-10 h-10 rounded-full" />
+            <CircleUserRoundIcon />
           </button>
           <nav className={`absolute right-0 top-full mt-2 w-48 ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'} shadow-lg rounded-lg z-10 ${isProfileMenuOpen ? 'block' : 'hidden'}`}>
             {profileMenuLinks.map((link) => (
