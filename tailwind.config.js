@@ -4,6 +4,7 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
     // Add other paths to your content files if needed
   ],
+  darkMode: 'class',
   theme: {
     extend: {},
     screens: {

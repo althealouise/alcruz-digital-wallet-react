@@ -15,3 +15,27 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+body.dark {
+  background-color: #2d2d2d;
+  color: white;
+}
+
+.app-container {
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.app-container.dark {
+  background-color: #1a1a1a;
+  color: #eaeaea;
+}
+
+.theme-toggle-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+}

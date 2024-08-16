@@ -8,15 +8,17 @@ import ProfileView from './views/ProfileView';
 import SettingsView from './views/SettingsView';
 import AccountManagement from './AccountManagement';
 import StorePurchase from './StorePurchase';
+import { useTheme } from '../ThemeContext'; // Import useTheme hook
 
 interface DashboardProps {
   onLogout: () => void;
 }
 
-function Dashboard({ onLogout }: DashboardProps) {
+function Dashboard({ onLogout }: DashboardProps): React.ReactElement {
   const [activeTab, setActiveTab] = useState<string>('home');
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState<boolean>(false);
   const navigate = useNavigate();
+  const { theme } = useTheme(); // Get current theme from context
 
   const navLinks = [
     { icon: <Home />, label: 'Home', key: 'home' },
@@ -47,9 +49,9 @@ function Dashboard({ onLogout }: DashboardProps) {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-gray-100">
+    <div className={`flex flex-col h-screen ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'} transition-colors duration-300`}>
       {/* Top Navigation Bar */}
-      <header className="bg-white shadow-md flex items-center justify-between p-4 relative">
+      <header className={`shadow-md flex items-center justify-between p-4 relative ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
         <h1 className="text-2xl font-bold text-blue-600 md:block">StratPay</h1>
         
         {/* Centered Navigation Menu for Larger Screens */}
@@ -58,7 +60,9 @@ function Dashboard({ onLogout }: DashboardProps) {
             <button
               key={link.key}
               className={`flex items-center py-2 px-4 rounded-lg mx-2 ${
-                activeTab === link.key ? 'bg-blue-100 text-blue-600' : 'text-gray-600 hover:bg-gray-100'
+                activeTab === link.key
+                  ? `${theme === 'dark' ? 'bg-blue-700 text-blue-200' : 'bg-blue-100 text-blue-600'}`
+                  : `${theme === 'dark' ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-600 hover:bg-gray-100'}`
               }`}
               onClick={() => handleTabChange(link.key)}
             >
@@ -72,15 +76,21 @@ function Dashboard({ onLogout }: DashboardProps) {
         <div className="relative flex items-center">
           <button 
             onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)} 
-            className="flex items-center space-x-2 text-gray-600 hover:text-blue-600"
+            className={`flex items-center space-x-2 ${
+              theme === 'dark' ? 'text-gray-300 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'
+            }`}
           >
             <img src="https://via.placeholder.com/40" alt="Profile" className="w-10 h-10 rounded-full" />
           </button>
-          <nav className={`absolute right-0 top-full mt-2 w-48 bg-white shadow-lg rounded-lg z-10 ${isProfileMenuOpen ? 'block' : 'hidden'}`}>
+          <nav className={`absolute right-0 top-full mt-2 w-48 ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'} shadow-lg rounded-lg z-10 ${isProfileMenuOpen ? 'block' : 'hidden'}`}>
             {profileMenuLinks.map((link) => (
               <button
                 key={link.key}
-                className="flex items-center py-2 px-4 w-full text-gray-600 hover:bg-gray-100 rounded-lg"
+                className={`flex items-center py-2 px-4 w-full ${
+                  theme === 'dark'
+                    ? 'text-gray-300 hover:bg-gray-700'
+                    : 'text-gray-600 hover:bg-gray-100'
+                } rounded-lg`}
                 onClick={() => handleProfileMenuClick(link.key)}
               >
                 {React.cloneElement(link.icon, { size: 18, className: 'mr-2' })}
@@ -92,7 +102,7 @@ function Dashboard({ onLogout }: DashboardProps) {
       </header>
 
       {/* Bottom Navigation for Smaller Screens */}
-      <nav className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-blue-600 rounded-xl flex justify-around items-center p-2 md:hidden shadow-lg w-11/12 max-w-xs">
+      <nav className={`fixed bottom-4 left-1/2 transform -translate-x-1/2 ${theme === 'dark' ? 'bg-blue-700' : 'bg-blue-600'} rounded-xl flex justify-around items-center p-2 md:hidden shadow-lg w-11/12 max-w-xs`}>
         {navLinks.map((link) => (
           <button
             key={link.key}
@@ -109,7 +119,9 @@ function Dashboard({ onLogout }: DashboardProps) {
       {/* Main Content */}
       <main className="flex-1 overflow-y-auto p-4">
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-2xl font-semibold text-gray-900">{activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}</h1>
+          <h1 className={`text-2xl font-semibold ${theme === 'dark' ? 'text-gray-100' : 'text-gray-900'}`}>
+            {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
+          </h1>
           <Routes>
             <Route path="/" element={<HomeView />} />
             <Route path="home" element={<HomeView />} />
