@@ -40,7 +40,7 @@ function HomeView(): React.ReactElement {
         }));
       } catch (error) {
         console.error('Error fetching balance:', error);
-        alert('Failed to fetch balance. Please try again later.');
+        alert('Failed to fetch balance. Please create a wallet');
       }
     };
 
