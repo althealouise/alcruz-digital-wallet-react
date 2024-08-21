@@ -8,7 +8,7 @@ import ProfileView from './views/ProfileView';
 import SettingsView from './views/SettingsView';
 import AccountManagement from './AccountManagement';
 import StorePurchase from './StorePurchase';
-import { useTheme } from '../ThemeContext'; 
+import { useTheme } from '../ThemeContext';
 
 interface DashboardProps {
   onLogout: () => void;
@@ -41,7 +41,15 @@ function Dashboard({ onLogout }: DashboardProps): React.ReactElement {
 
   const handleProfileMenuClick = (key: string) => {
     if (key === 'logout') {
+      // Clear the JWT token with user data from local storage
+      localStorage.removeItem('token');
+      localStorage.removeItem('userData');
+      
+      // Call the onLogout function to handle additional logout tasks
       onLogout();
+      
+      // Redirect to the login page (or another appropriate action)
+      navigate('/login');
     } else {
       navigate(key);
       setIsProfileMenuOpen(false);
@@ -108,11 +116,6 @@ function Dashboard({ onLogout }: DashboardProps): React.ReactElement {
       {/* Main Content */}
       <main className="flex-1 overflow-y-auto p-4 pb-20"> {/* Added padding-bottom to accommodate the bottom navbar */}
         <div className="max-w-7xl mx-auto">
-          {/*
-          <h1 className={`text-2xl font-semibold ${theme === 'dark' ? 'text-gray-100' : 'text-gray-900'}`}>
-            {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
-          </h1>
-          */}
           <Routes>
             <Route path="/" element={<HomeView />} />
             <Route path="home" element={<HomeView />} />

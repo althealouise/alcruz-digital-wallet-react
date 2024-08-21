@@ -90,7 +90,7 @@ function HomeView(): React.ReactElement {
   };
 
   const handlePayUsingQR = () => {
-    navigate('dashboard/store-purchase'); // Redirect to the QR payment page
+    navigate('/dashboard/store-purchase'); 
   };
 
   return (
