@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Home, CreditCard, DollarSign, Bell, ShoppingBag, User, Settings, LogOut, CircleUserRoundIcon } from 'lucide-react';
+import { Home, Wallet, DollarSign, Bell, ShoppingBag, User, Settings, LogOut, CircleUserRoundIcon } from 'lucide-react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import HomeView from './views/HomeView';
 import TransactionsView from './views/TransactionsView';
@@ -22,7 +22,7 @@ function Dashboard({ onLogout }: DashboardProps): React.ReactElement {
 
   const navLinks = [
     { icon: <Home />, label: 'Home', key: 'home' },
-    { icon: <CreditCard />, label: 'Accounts', key: 'accounts' },
+    { icon: <Wallet />, label: 'Account', key: 'accounts' },
     { icon: <DollarSign />, label: 'Transactions', key: 'transactions' },
     { icon: <ShoppingBag />, label: 'Store Purchase', key: 'store-purchase' },
     { icon: <Bell />, label: 'Notifications', key: 'notifications' },

@@ -1,42 +1,47 @@
-import React, { useState, FormEvent, useEffect } from 'react';
+import React, { useState, FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { useTheme } from '../ThemeContext'; // Adjust the path as needed
 
 interface LoginProps {
   onLogin: () => void;
 }
 
-const Login: React.FC<LoginProps> = ({ onLogin }) => {
+const Login = ({ onLogin }: LoginProps) => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [validCredentials, setValidCredentials] = useState<{ email: string, password: string }[] | null>(null);
   const navigate = useNavigate();
-  const { theme } = useTheme(); // Use the context to get the current theme
+  const { theme } = useTheme(); 
 
-  useEffect(() => {
-    // Fetch credentials from JSON file
-    fetch('/testCredentials.json')
-      .then(response => response.json())
-      .then(data => setValidCredentials(data.users))
-      .catch(error => console.error('Error loading credentials:', error));
-  }, []);
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
-
-    if (validCredentials) {
-      const isValid = validCredentials.some(
-        (cred) => cred.email === email && cred.password === password
-      );
-
-      if (isValid) {
-        onLogin(); // Call the onLogin function passed from App.tsx
-        navigate('/dashboard'); // Navigate to dashboard after successful login
+  
+    try {
+      const response = await axios.post('http://localhost:3000/api/auth/login', {
+        email,
+        password,
+      });
+  
+      // Store the token and user data in the localStorage
+      const token = response.data.token;
+      localStorage.setItem('token', token);
+      localStorage.setItem('userData', JSON.stringify(response.data.user));
+  
+      // Call the onLogin function passed from App.tsx
+      onLogin();
+  
+      // Log the token to the console for debugging purposes
+      console.log('Stored token:', token);
+  
+      // Navigate to the dashboard after successful login
+      navigate('/dashboard');
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response && error.response.data.error) {
+        alert(error.response.data.error);
       } else {
-        alert('Invalid credentials'); // Display an error message
+        console.error('Error during login:', error);
+        alert('An error occurred during login. Please try again later.');
       }
-    } else {
-      alert('Credentials not loaded yet');
     }
   };
 
@@ -84,6 +89,6 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
       </div>
     </div>
   );
-}
+};
 
 export default Login;
