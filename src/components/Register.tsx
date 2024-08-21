@@ -7,18 +7,37 @@ interface RegisterProps {
 }
 
 const Register: React.FC<RegisterProps> = ({ onLogin }) => {
-  const [name, setName] = useState<string>('');
+  const [firstName, setFirstName] = useState<string>('');
+  const [lastName, setLastName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const navigate = useNavigate();
   const { theme } = useTheme(); // Use the context to get the current theme
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Here you would typically make an API call to register the user
-    console.log('Registration attempt:', name, email, password);
-    onLogin(); // Automatically log in the user after successful registration
-    navigate('/dashboard'); // Navigate to dashboard after successful registration
+    try {
+      const response = await fetch('http://localhost:3000/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password, firstName, lastName }),
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error);
+      }
+
+      const { message } = await response.json();
+      console.log(message);
+      onLogin(); // Automatically log in the user after successful registration
+      navigate('/dashboard');
+    } catch (error) {
+      console.error('Registration error:', error);
+      alert(error)
+    }
   };
 
   return (
@@ -34,12 +53,23 @@ const Register: React.FC<RegisterProps> = ({ onLogin }) => {
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="name" className={`block text-sm font-medium ${theme === 'dark' ? 'text-gray-400' : 'text-gray-700'}`}>Name</label>
+            <label htmlFor="firstName" className={`block text-sm font-medium ${theme === 'dark' ? 'text-gray-400' : 'text-gray-700'}`}>First Name</label>
             <input
               type="text"
-              id="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              id="firstName"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              required
+              className={`mt-1 block w-full border ${theme === 'dark' ? 'border-gray-600 bg-gray-700 text-gray-100' : 'border-gray-300 bg-white text-gray-900'} rounded-md shadow-sm p-2`}
+            />
+          </div>
+          <div>
+            <label htmlFor="lastName" className={`block text-sm font-medium ${theme === 'dark' ? 'text-gray-400' : 'text-gray-700'}`}>Last Name</label>
+            <input
+              type="text"
+              id="lastName"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
               required
               className={`mt-1 block w-full border ${theme === 'dark' ? 'border-gray-600 bg-gray-700 text-gray-100' : 'border-gray-300 bg-white text-gray-900'} rounded-md shadow-sm p-2`}
             />
