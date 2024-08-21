@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Home, Wallet, DollarSign, Bell, ShoppingBag, User, Settings, LogOut, CircleUserRoundIcon } from 'lucide-react';
+import { Home, Wallet, DollarSign, Bell, QrCode, User, Settings, LogOut, CircleUserRoundIcon } from 'lucide-react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import HomeView from './views/HomeView';
 import TransactionsView from './views/TransactionsView';
@@ -8,7 +8,7 @@ import ProfileView from './views/ProfileView';
 import SettingsView from './views/SettingsView';
 import AccountManagement from './AccountManagement';
 import StorePurchase from './StorePurchase';
-import { useTheme } from '../ThemeContext'; // Import useTheme hook
+import { useTheme } from '../ThemeContext'; 
 
 interface DashboardProps {
   onLogout: () => void;
@@ -24,7 +24,7 @@ function Dashboard({ onLogout }: DashboardProps): React.ReactElement {
     { icon: <Home />, label: 'Home', key: 'home' },
     { icon: <Wallet />, label: 'Account', key: 'accounts' },
     { icon: <DollarSign />, label: 'Transactions', key: 'transactions' },
-    { icon: <ShoppingBag />, label: 'Store Purchase', key: 'store-purchase' },
+    { icon: <QrCode />, label: 'QR Payment', key: 'store-purchase' },
     { icon: <Bell />, label: 'Notifications', key: 'notifications' },
   ];
 
@@ -51,7 +51,7 @@ function Dashboard({ onLogout }: DashboardProps): React.ReactElement {
   return (
     <div className={`flex flex-col h-screen ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'} transition-colors duration-300`}>
       {/* Top Navigation Bar */}
-      <header className={`shadow-md flex items-center justify-between p-4 relative ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
+      <header className={`shadow-md rounded-full m-4 flex items-center justify-between p-4 relative ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
         {/* Logo and Title */}
         <div className="flex items-center space-x-2">
           <img src="/stratpay.png" alt="Logo" className="w-10 h-10" /> 
